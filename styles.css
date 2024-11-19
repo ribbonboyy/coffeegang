@@ -1,32 +1,99 @@
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f4f4f9;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(to bottom, #1e1e2f, #3e3e5a);
+    color: #f1f1f1;
     margin: 0;
     padding: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
 }
 
+/* Title */
 h1 {
-    margin-top: 1rem;
-    font-size: 2rem;
+    margin: 1rem 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ffce00;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* Pixel Canvas Container */
 #pixel-canvas {
     display: grid;
-    grid-template-columns: repeat(32, 20px); /* 32x32 grid with 20px pixels */
+    grid-template-columns: repeat(64, 10px);
     gap: 1px;
     margin: 1rem auto;
-    width: fit-content;
-    background: #333;
+    background: #444;
+    border: 2px solid #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
+/* Pixel */
 .pixel {
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
     background-color: #fff;
     cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-#color-picker {
+.pixel:hover {
+    transform: scale(1.2);
+}
+
+/* Control Panel */
+#color-picker, #clear-canvas {
     margin-top: 1rem;
+}
+
+label {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+    color: #ffce00;
+}
+
+input[type="color"] {
+    border: none;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+    outline: 2px solid #ffce00;
+    transition: transform 0.2s ease;
+}
+
+input[type="color"]:hover {
+    transform: scale(1.2);
+}
+
+/* Clear Button */
+#clear-canvas {
+    background: #ff5252;
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+#clear-canvas:hover {
+    background: #ff0000;
+    transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #pixel-canvas {
+        grid-template-columns: repeat(32, 10px); /* Smaller canvas on smaller screens */
+    }
 }
