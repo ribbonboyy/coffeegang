@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin-top: 1rem;
+    font-size: 2rem;
+}
+
+#pixel-canvas {
+    display: grid;
+    grid-template-columns: repeat(32, 20px); /* 32x32 grid with 20px pixels */
+    gap: 1px;
+    margin: 1rem auto;
+    width: fit-content;
+    background: #333;
+}
+
+.pixel {
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+#color-picker {
+    margin-top: 1rem;
+}
