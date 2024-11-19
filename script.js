@@ -37,3 +37,12 @@ function saveCanvasState() {
 
 // Initialize the grid
 createGrid();
+
+// Clear the canvas and reset the state
+document.getElementById("clear-canvas").addEventListener("click", () => {
+    savedState.fill("#fff"); // Reset all pixels to white
+    localStorage.setItem(pixelStatesKey, JSON.stringify(savedState)); // Update localStorage
+    canvas.innerHTML = ""; // Clear the canvas
+    createGrid(); // Recreate the grid
+});
+
