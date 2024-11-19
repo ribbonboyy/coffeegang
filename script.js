@@ -1,27 +1,27 @@
 const canvas = document.getElementById("pixel-canvas");
 const colorPicker = document.getElementById("color");
+const clearButton = document.getElementById("clear-canvas");
 
 const gridSize = 64; // Grid size: 64x64
 const pixelStatesKey = "pixelCanvasState"; // Key for localStorage
 
 // Load saved canvas state (if exists)
-const savedState = JSON.parse(localStorage.getItem(pixelStatesKey)) || [];
+const savedState = JSON.parse(localStorage.getItem(pixelStatesKey)) || Array(gridSize * gridSize).fill("#fff");
 
-// Function to create the grid
+// Create the grid
 function createGrid() {
+    canvas.innerHTML = ""; // Clear the canvas
     for (let i = 0; i < gridSize * gridSize; i++) {
         const pixel = document.createElement("div");
         pixel.classList.add("pixel");
-
-        // Restore saved color (if exists)
-        pixel.style.backgroundColor = savedState[i] || "#fff";
+        pixel.style.backgroundColor = savedState[i]; // Set saved color
 
         // Add click listener to change color
         pixel.addEventListener("click", () => {
             const color = colorPicker.value;
             pixel.style.backgroundColor = color;
 
-            // Save the updated color to the state
+            // Update the saved state
             savedState[i] = color;
             saveCanvasState();
         });
@@ -35,14 +35,13 @@ function saveCanvasState() {
     localStorage.setItem(pixelStatesKey, JSON.stringify(savedState));
 }
 
-// Initialize the grid
-createGrid();
-
-// Clear the canvas and reset the state
-document.getElementById("clear-canvas").addEventListener("click", () => {
-    savedState.fill("#fff"); // Reset all pixels to white
-    localStorage.setItem(pixelStatesKey, JSON.stringify(savedState)); // Update localStorage
-    canvas.innerHTML = ""; // Clear the canvas
-    createGrid(); // Recreate the grid
+// Clear the canvas and reset state
+clearButton.addEventListener("click", () => {
+    savedState.fill("#fff");
+    saveCanvasState();
+    createGrid();
 });
+
+// Initialize the canvas
+createGrid();
 
